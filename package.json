@@ -1,0 +1,27 @@
+{
+  "name": "auther-github",
+  "license": "MIT",
+  "version": "1.0.0",
+  "description": "",
+  "author": {
+    "name": "Kamas Lau",
+    "email": "kamaslau@dingtalk.com"
+  },
+  "engines": {
+    "node": "^18 || >=18"
+  },
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "NODE_ENV=production node ."
+  },
+  "keywords": [
+    "auth",
+    "GitHub"
+  ],
+  "dependencies": {
+    "@koa/cors": "^4.0.0",
+    "koa": "latest"
+  }
+}
