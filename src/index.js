@@ -1,7 +1,7 @@
 import Koa from "koa";
 import cors from "@koa/cors";
 import { consoleInit, briefLog, methodHandler } from "./utils.js";
-import { authGithub } from "./libs/authGithub.js";
+import doAuth from "./libs/authGithub.js";
 
 globalThis.isDev = process.env.NODE_ENV !== "production";
 
@@ -15,6 +15,6 @@ app.use(cors({ origin: "*", allowMethods: "POST" }));
 
 app.use(methodHandler);
 
-app.use(authGithub);
+app.use(doAuth);
 
 app.listen(3000);
