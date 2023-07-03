@@ -1,6 +1,6 @@
 import Koa from "koa";
 import cors from "@koa/cors";
-import { consoleInit, briefLog } from "./utils/briefLog.js";
+import { consoleInit, briefLog, methodHandler } from "./utils.js";
 import { authGithub } from "./libs/authGithub.js";
 
 globalThis.isDev = process.env.NODE_ENV !== "production";
@@ -13,17 +13,7 @@ app.use(briefLog);
 
 app.use(cors({ origin: "*", allowMethods: "POST" }));
 
-app.use(async (ctx, next) => {
-  if (ctx.method === "OPTIONS") {
-    // Quickly response to OPTIONS method
-    ctx.status = 204;
-  } else if (ctx.method === "POST") {
-    // Allow only POST method
-    await next();
-  } else {
-    ctx.status = 405;
-  }
-});
+app.use(methodHandler);
 
 app.use(authGithub);
 

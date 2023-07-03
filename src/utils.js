@@ -59,3 +59,21 @@ export const briefLog = async (ctx, next) => {
     `${ctx.ip} > ${ctx.method} ${ctx.type} > ${ctx.url} - ${durationText}`
   );
 };
+
+/**
+ * Handle request method
+ *
+ * @param {*} ctx
+ * @param {*} next
+ */
+export const methodHandler = async (ctx, next) => {
+  if (ctx.method === "OPTIONS") {
+    // Quickly response to OPTIONS method
+    ctx.status = 204;
+  } else if (ctx.method === "POST") {
+    // Allow only POST method
+    await next();
+  } else {
+    ctx.status = 405;
+  }
+};
