@@ -9,7 +9,7 @@ export const errorCatcher = (error, ctx) => {
 
   ctx.status = error.status ?? 501;
   ctx.body = {
-    content: error.message,
+    errorMessage: error.cause.message,
     figureURL: `https://http.cat/${error.status}`,
   };
 };
