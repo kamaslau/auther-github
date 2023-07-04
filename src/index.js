@@ -1,6 +1,6 @@
+import * as dotenv from "dotenv";
 import Koa from "koa";
 import cors from "@koa/cors";
-import * as dotenv from "dotenv";
 import { errorCatcher, consoleInit, briefLog, methodHandler } from "./utils.js";
 import auth from "./libs/github.js";
 
@@ -11,7 +11,7 @@ consoleInit();
 process.env.NODE_ENV === "development" &&
   console.log(
     "Request code with url: ",
-    `https://github.com/login/oauth/authorize?client_id=${process.env.GH_ID}&redirect_uri=http://localhost:${process.env.PORT}&scope=user:email`
+    `https://github.com/login/oauth/authorize?client_id=${process.env.APP_ID}&redirect_uri=http://localhost:${process.env.PORT}&scope=user:email`
   );
 
 const app = new Koa();

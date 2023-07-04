@@ -18,6 +18,9 @@ pnpm start:dev
 # production (better use with PM2)
 # pnpm start
 
-# Test availability
+# Usage
+## development
 curl -X POST http://localhost:3000?code=123456asdf
+### production
+curl -X POST <yourUrl>?code=123456asdf&appId=<yourAppId>&appSecret=<yourappSecret>
 ```

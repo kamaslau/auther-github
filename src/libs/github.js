@@ -9,8 +9,8 @@
  * 处理授权、用户资料获取等业务
  */
 const composeCredentials = (code, appId, appSecret) => ({
-  client_id: appId ?? process.env.GH_ID,
-  client_secret: appSecret ?? process.env.GH_SECRET,
+  client_id: appId ?? process.env.APP_ID,
+  client_secret: appSecret ?? process.env.APP_SECRET,
   code,
 });
 
