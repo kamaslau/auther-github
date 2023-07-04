@@ -7,7 +7,11 @@ export const main = async (ctx) => {
     return;
   }
 
-  ctx.body = { code };
+  ctx.body = {
+    code,
+    gitHubId:
+      process.env.NODE_ENV === "development" ? process.env.GH_ID : "hidden",
+  };
 };
 
 export default main;

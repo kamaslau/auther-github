@@ -1,4 +1,20 @@
 /**
+ * 错误处理
+ *
+ * @param {*} error
+ * @param {*} ctx
+ */
+export const errorCatcher = (error, ctx) => {
+  console.error("server error: ", error);
+
+  ctx.status = error.status ?? 501;
+  ctx.body = {
+    content: error.message,
+    figureURL: `https://http.cat/${error.status}`,
+  };
+};
+
+/**
  * 获取请求IP地址
  *
  * 在koa.js中间件中，通过 ctx.ip 可直接获取
