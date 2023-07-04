@@ -1,11 +1,6 @@
 /**
  * GitHub相关
  *
- * https://docs.github.com/
- * https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/
- * https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps
- * https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/scopes-for-oauth-apps
- *
  * 处理授权、用户资料获取等业务
  */
 const composeCredentials = (code, appId, appSecret) => ({
