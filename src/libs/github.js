@@ -8,9 +8,9 @@
  *
  * 处理授权、用户资料获取等业务
  */
-const composeCredentials = (code) => ({
-  client_id: process.env.GH_ID,
-  client_secret: process.env.GH_SECRET,
+const composeCredentials = (code, appId, appSecret) => ({
+  client_id: appId ?? process.env.GH_ID,
+  client_secret: appSecret ?? process.env.GH_SECRET,
   code,
 });
 
@@ -68,15 +68,29 @@ const requestUserAccount = async (token) => {
  * 3. 应用服务端使用access_token向GitHub服务端请求用户数据
  */
 export const main = async (ctx) => {
-  const { code } = ctx.query;
+  // validate params
+  const params = ctx.query;
+  // console.log("params: ", params);
 
-  if (!code) {
-    ctx.body = { errorMessage: "input 'code' not received" };
-    ctx.status = 422;
-    return;
+  if (process.env.NODE_ENV === "development") {
+    if (!params.code) {
+      ctx.throw(422, "input 'code' not received");
+    }
+  } else {
+    const requiredParams = ["code", "appId", "appSecret"];
+    const missedParams = requiredParams.filter((item) => !params[item]);
+
+    if (missedParams.length > 0) {
+      const missedParamsString = missedParams.reduce(
+        (prev, now) => `${prev}'${now}', `,
+        ""
+      );
+      ctx.throw(422, `input ${missedParamsString.trimEnd(", ")} not received`);
+    }
   }
 
-  const credentials = composeCredentials(code);
+  const { code, appId, appSecret } = params;
+  const credentials = composeCredentials(code, appId, appSecret);
 
   const { access_token } = await requestAccessToken(credentials);
 

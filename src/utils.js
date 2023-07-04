@@ -8,10 +8,6 @@ export const errorCatcher = (error, ctx) => {
   console.error("server error: ", error);
 
   ctx.status = error.status ?? 501;
-  ctx.body = {
-    errorMessage: error.cause.message,
-    figureURL: `https://http.cat/${error.status}`,
-  };
 };
 
 /**
