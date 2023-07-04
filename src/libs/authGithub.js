@@ -9,8 +9,6 @@ export const main = async (ctx) => {
 
   ctx.body = {
     code,
-    gitHubId:
-      process.env.NODE_ENV === "development" ? process.env.GH_ID : "hidden",
   };
 };
 

@@ -5,9 +5,13 @@ import { errorCatcher, consoleInit, briefLog, methodHandler } from "./utils.js";
 import doAuth from "./libs/authGithub.js";
 
 dotenv.config();
-globalThis.isDev = process.env.NODE_ENV !== "production";
 
 consoleInit();
+
+process.env.NODE_ENV === "development" &&
+  console.log(
+    `https://github.com/login/oauth/authorize?client_id=${process.env.GH_ID}&redirect_uri=http://localhost:${process.env.PORT}&scope=user:email`
+  );
 
 const app = new Koa();
 
@@ -21,4 +25,4 @@ app.use(methodHandler);
 
 app.use(doAuth);
 
-app.listen(3000);
+app.listen(process.env.PORT);
