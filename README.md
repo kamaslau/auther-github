@@ -37,16 +37,25 @@ curl -X POST <your-service-url>?code=123456asdf&appId=<your-appId>&appSecret=<yo
 
 ### Docker
 
-构建镜像
+#### 集成文件
 
 ```bash
-APP_NAME=auther-github \
-docker build . -t auther-github:latest --no-cache
+# 编译并发布
+APP_NAME=auther-github sh -x build.sh
+# 拉取并运行
+APP_NAME=auther-github sh -x run.sh
 ```
 
-启动容器
+#### 单独操作
 
 ```bash
+# 单独构建镜像
+APP_NAME=auther-github \
+docker build . -t $APP_NAME:latest --no-cache
+```
+
+```bash
+# 单独启动容器
 IMAGE_NAME=auther-github \
 APP_NAME=auther-github \
 PORT=3000 \
