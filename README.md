@@ -2,7 +2,13 @@
 
 Auth with GitHub, get user info as result.
 
-Post in params as URL query with:
+First, get auth code with your tokens:
+
+```bash
+https://github.com/login/oauth/authorize?client_id=<your-appId>&redirect_uri=<your-callbackUrl>&scope=user:email
+```
+
+Then, post params with URL query with:
 
 |      Name | Required $NODE_ENV     | Description |
 | --------: | ---------------------- | ----------- |
@@ -24,7 +30,7 @@ For more infos, checkout references:
 curl -X POST http://localhost:3000?code=123456asdf
 
 # production
-curl -X POST <your-url>?code=123456asdf&appId=<your-appId>&appSecret=<your-appSecret>
+curl -X POST <your-service-url>?code=123456asdf&appId=<your-appId>&appSecret=<your-appSecret>
 ```
 
 ## Deploy
