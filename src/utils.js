@@ -23,11 +23,9 @@ const getClientIP = (req) => {
 
   // 判断是否有反向代理 IP
   const result =
-    req.headers["x-forwarded-for"] ?? // 判断是否有反向代理 IP
-    req.headers["x-real-ip"] ??
-    req.connection.remoteAddress ?? // 判断 connection 的远程 IP
+    req.headers["x-forwarded-for"]?.toString() ?? // 判断是否有反向代理 IP
+    req.headers["x-real-ip"]?.toString() ??
     req.socket.remoteAddress ?? // 判断后端的 socket 的 IP
-    req.connection.socket.remoteAddress ??
     "";
 
   // console.log('result: ', result)
@@ -53,22 +51,21 @@ export const consoleInit = () => {
  * @param {*} next
  */
 export const briefLog = async (ctx, next) => {
-  const start = Date.now();
-  if (ctx.url !== "/favicon.ico") await next();
-
-  // Client IP
   // 可按需开启不同测试信息的输出
   //  console.log('ctx.req(node req): ', ctx.req)
   //  console.log('ctx.request: ', ctx.request)
-  ctx.set("APP-Client-IP", getClientIP(ctx.req));
 
-  // Response Time
+  const start = Date.now();
+  if (ctx.url !== "/favicon.ico") await next();
+
   const duration = Date.now() - start;
   const durationText = `${duration}ms`;
   ctx.set("X-Response-Time", durationText);
 
+  ctx.set("APP-Client-IP", getClientIP(ctx.req));
+
   console.log(
-    `${ctx.ip} > ${ctx.method} ${ctx.type} > ${ctx.url} - ${durationText}`
+    `${ctx.ip} ${ctx.method} ${ctx.type} > ${ctx.url} - ${durationText}`
   );
 };
 
