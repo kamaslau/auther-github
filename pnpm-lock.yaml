@@ -17,7 +17,7 @@ dependencies:
 
 devDependencies:
   cross-env:
-    specifier: latest
+    specifier: ^7.0.3
     version: 7.0.3
 
 packages:

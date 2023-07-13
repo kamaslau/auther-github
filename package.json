@@ -2,7 +2,11 @@
   "name": "auther-github",
   "license": "MIT",
   "version": "1.0.0",
-  "description": "",
+  "description": "Github authentication",
+  "keywords": [
+    "auth",
+    "GitHub"
+  ],
   "author": {
     "name": "Kamas Lau",
     "email": "kamaslau@dingtalk.com"
@@ -17,16 +21,12 @@
     "start:dev": "cross-env NODE_ENV=development node .",
     "start": "NODE_ENV=production node ."
   },
-  "keywords": [
-    "auth",
-    "GitHub"
-  ],
   "dependencies": {
     "@koa/cors": "^4.0.0",
     "dotenv": "^16.3.1",
     "koa": "^2"
   },
   "devDependencies": {
-    "cross-env": "latest"
+    "cross-env": "^7.0.3"
   }
 }
