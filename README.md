@@ -1,5 +1,7 @@
 # auther-github
 
+This is a stand-alone Github unit of [kamaslau/auther](https://github.com/kamaslau/auther), for more auth method, consider use [kamaslau/auther](https://github.com/kamaslau/auther).
+
 Auth with GitHub, get user info as result.
 
 First, get auth code with your tokens:
